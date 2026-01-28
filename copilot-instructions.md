@@ -1,0 +1,1 @@
+Læs min kode altså mine filer som er relavante for mit spørgsmål inden du svarer! Brug konteksten når du svarer!

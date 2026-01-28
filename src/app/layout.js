@@ -1,4 +1,6 @@
 import "./globals.css";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
 
 export const metadata = {
   title: { 
@@ -12,9 +14,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`antialiased`}
+        className="box-border"
       >
+        <Header />
+        <main className="flex m-4">
         {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

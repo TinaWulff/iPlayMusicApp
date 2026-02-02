@@ -39,28 +39,36 @@ export default async function DiscoverPage() {
 <section className='w-full max-w-full'>
     <h1 className='bg-gradient-to-br from-[#EE0979] to-[#FF6A00] bg-clip-text text-transparent text-5xl font-bold my-6'>Discover</h1>
 
-    <section>
-        <h2>Categories</h2>
-        <ul className='flex'>
+    {/* Categories section */}
+    <section className='mb-6'>
+        <h2 className='mb-6 text-2xl font-bold'>Categories</h2>
+        <ul className='flex gap-4'>
             {categoriesWithPlaylists.map((category) => (
             <li key={category.id} className="font-bold mb-4">
+                <article className="hover:cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out w-[100px]">
+                        {category.icons?.[0]?.url && (
+                    <Image className="rounded-full object-cover mb-2 shadow-xl"
+                        src={category.icons[0].url} alt={category.name} width={100} height={100} />
+                    )}
+                     <p className="flex items-center text-center justify-center font-bold hover:underline text-xs">
+                            {category.name}
+                        </p>
 
-              {category.name}
-                 {category.icons?.[0]?.url && (
-                <Image src={category.icons[0].url} alt={category.name} width={100} height={100} />
-                )}
+                {/* Playlists (may be empty due to deprecated endpoint) */}
               <ul className="ml-4 font-normal">
                 {category.playlists && category.playlists.map((playlist) => (
                   <li key={playlist.id}>
                     {playlist.name}
-                    </li>
+                </li>
                 ))}
               </ul>
+                </article>
             </li>
             ))}
         </ul>
     </section>
 
+    {/* New Releases section */}
     <section className='w-full max-w-full'>
         <h2 className="text-2xl font-bold mb-6">
             New Releases</h2>
@@ -68,7 +76,8 @@ export default async function DiscoverPage() {
           {newReleasesWithTracks.map((album) => (
             <li key={album.id} className="font-bold mb-10 flex-shrink-0">
               <article className="hover:cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out w-[100px]">
-              <Link href={album.external_urls?.spotify ?? '#'} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center">
+              <Link href={album.external_urls?.spotify ?? '#'} target="_blank" rel="noopener noreferrer"
+              className="flex flex-col items-center">
               {album.images?.[0]?.url && (
                 <Image className="rounded-full object-cover mb-2 shadow-xl"
                 src={album.images[0].url} alt={album.name} width={100} height={100} />
@@ -88,6 +97,11 @@ export default async function DiscoverPage() {
         </ul>
     </section>
 
+    {/* My top artists section */}
+    <section>
+          
+
+    </section>
 
 </section>
 

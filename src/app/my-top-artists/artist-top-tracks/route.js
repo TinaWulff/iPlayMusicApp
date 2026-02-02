@@ -22,6 +22,14 @@ export async function GET(request) {
   });  
 
   if (!response.ok) {
+    // Tjek for rate limit og vis Retry-After
+    if (response.status === 429) {
+      const retryAfter = response.headers.get('Retry-After');
+      console.log(`Rate limited! Vent ${retryAfter} sekunder`);
+      return new Response(JSON.stringify({ 
+        error: `Too many requests - vent ${retryAfter} sekunder` 
+      }), { status: 429 });
+    }
     const text = await response.text();
     return new Response(JSON.stringify({ error: text }), { status: response.status });
   }

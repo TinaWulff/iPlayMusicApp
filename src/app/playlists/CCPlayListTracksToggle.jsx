@@ -77,12 +77,12 @@ export default function CCPlayListTracksToggle({ playlists } ) {
                   width={120}
                   height={120}
                   className={`rounded-lg w-full ${
-                    activePlaylistId === playlist.id ? 'ring-4 ring-rose-500' : ''
+                    activePlaylistId === playlist.id ? 'scale-105' : ''
                   }`}
                 />
               )}
               <p className={`text-sm mt-2 truncate ${
-                activePlaylistId === playlist.id ? 'font-bold text-rose-500' : ''
+                activePlaylistId === playlist.id ? 'font-bold text-xl' : ''
               }`}>
                 {playlist.name}
               </p>
@@ -91,10 +91,11 @@ export default function CCPlayListTracksToggle({ playlists } ) {
         ))}
       </ul>
     </section>
-    
+
     <section className="w-full">
+        {/* <h3>activePlaylistId === {playlist.name}</h3> */}
     {activePlaylistId && (
-    <ul className="overflow-y-auto h-[500px] mb-10">
+    <ul className="overflow-y-auto h-[500px] mb-10 mx-4">
         {playlistTracks[activePlaylistId]
           ?.filter(track => track.track)
           .map((track, idx) => (

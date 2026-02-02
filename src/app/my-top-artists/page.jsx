@@ -11,7 +11,7 @@ export default async function MyTopArtistsPage() {
 
 
     return (
-      <section className="max-w-full w-full">
+      <section className="max-w-full w-full mx-4">
         <h1 className="text-3xl font-bold mb-6 mt-2 text-red-400">
             My Top Artists</h1>
         <MyTopArtistToggle artists={topArtists} />

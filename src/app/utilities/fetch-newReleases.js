@@ -12,7 +12,7 @@ export default async function fetchNewReleases() {
   }
 
   const response = await fetch('https://api.spotify.com/v1/browse/new-releases', {
-    next: { revalidate: 60*60*1 },
+    next: { revalidate: 60*60*24 },
     headers: {
       'Authorization': `Bearer ${accessTokenCookie.value}`
     }

@@ -21,6 +21,11 @@ export default async function fetchAlbumsTracks(albumId) {
     }
   });
 
+  if (!response.ok) {
+    console.error(`Fejl ved hentning af album tracks: ${response.status} ${response.statusText}`);
+    return [];
+  }
+
   const data = await response.json();
-  return data.items;
+  return data.items ?? [];
 }

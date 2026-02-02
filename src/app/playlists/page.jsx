@@ -16,7 +16,7 @@ export default async function PlaylistsPage() {
          <div className="fixed top-0 left-0 w-full h-[300px] z-[-1]">
         <Image src="/assets/sound-wave.png" alt="Sound Wave" fill/>
          </div>
-         <h1 className="text-3xl font-bold mb-6 mt-2 text-white">
+         <h1 className="text-3xl font-bold mb-6 mt-2 text-white mx-4">
           My Playlists</h1>
         <CCPlayListTracksToggle playlists={playlists} />
       </section>

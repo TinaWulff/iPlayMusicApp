@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         className="box-border"
       >
         <Header />
-        <main className="flex m-4">
+        <main className="flex">
         {children}
         </main>
         <Footer />

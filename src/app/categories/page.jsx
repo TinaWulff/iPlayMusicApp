@@ -40,10 +40,10 @@ export default async function CategoriesPage() {
 
   return (
 
-    <section className='w-full max-w-full'>
+    <section className='w-full max-w-full mx-4 mb-0'>
     <h1 className='text-4xl font-bold mb-6 bg-gradient-to-br from-[#EE0979] to-[#FF6A00] bg-clip-text text-transparent'>Categories</h1>
 
-    <ul className='h-[750px] overflow-y-auto w-full max-w-full gap-4'>
+    <ul className='h-[800px] overflow-y-auto w-full max-w-full gap-4 pb-10'>
         {categoriesWithPlaylists.map((category, idx) => (
        <li key={category.id} className={`font-bold text-white mb-4 p-4 w-full bg-gradient-to-br ${regnbueFarver[idx % regnbueFarver.length]} rounded-lg shadow-lg`}>
               {category.name}

@@ -1,9 +1,10 @@
+// Denne side bruges ikke i appen. har været brugt til udvikling, men er lavet om og optimeret til My-top-artist. 
+// enne metode fetcher for meget på en gang og presser rate limit.
+
 import fetchAllPlaylistArtists from "@/app/utilities/fetch-allPlaylistsArtists";
 import fetchArtistTopTracks from "@/app/utilities/fetch-myArtistsTopTracks";
 import MyArtistsWithToggles from "@/app/components/my-artists-top-tracks/MyArtistsWithToggles.jsx";
 import fetchMyTopArtists from "../utilities/fetch-myTopArtists";
-
-
 
 export default async function MyArtistsTopTracksPage() {
   // Hent alle artists fra playlister

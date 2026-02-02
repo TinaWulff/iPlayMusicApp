@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <header className="grid grid-cols-[1fr_3fr_1fr] width-full m-4 items-center">
-        <button onClick={() => router.back()}><IoChevronBack /></button>
+        <button className=" hover:cursor-pointer" onClick={() => router.back()}><IoChevronBack /></button>
         <p className="justify-self-center uppercase text-xs"
         >{formatPathname(pathname)}</p>
 

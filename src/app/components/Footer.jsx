@@ -1,6 +1,4 @@
 'use client'
-import { IoChevronBack } from "react-icons/io5";
-import { IoSearchOutline } from "react-icons/io5";
 import { usePathname } from 'next/navigation'
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
@@ -9,7 +7,8 @@ import Image from "next/image";
 import { BsSearchHeart } from "react-icons/bs";
 import { MdLibraryMusic } from "react-icons/md";
 import { RiStarSmileLine } from "react-icons/ri";
-import { RiUserSettingsLine } from "react-icons/ri";
+//import { RiUserSettingsLine } from "react-icons/ri";
+import { RiHomeSmile2Line } from "react-icons/ri";
 
 
 
@@ -25,9 +24,9 @@ export default function Footer() {
     const pathname = usePathname();
     const [showDiscover, setShowDiscover] = useState(false);
 
-    // Overlay klik
-    const handleDiscoverClick = () => setShowDiscover((v) => !v);
-    const handleOverlayClick = () => setShowDiscover(false);
+    // // Overlay klik
+    // const handleDiscoverClick = () => setShowDiscover((v) => !v);
+    // const handleOverlayClick = () => setShowDiscover(false);
 
     return (
         <footer className="w-full max-w-full px-4 fixed bottom-0 h-[66px] bg-white shadow-2xl flex items-center justify-center z-50"
@@ -55,8 +54,13 @@ export default function Footer() {
                 </li>
 
 
+
                 <li className="content-center">
-                    <button type="button" onClick={handleDiscoverClick} className={`flex flex-col items-center ${showDiscover ? "font-bold text-red-400" : ""}`}>
+                     <Link href="/discover" className={`flex flex-col items-center ${isActive("/discover", pathname)}`}>
+                        <BsSearchHeart size={26} /> Discover
+                    </Link>
+
+                    {/* <button type="button" onClick={handleDiscoverClick} className={`flex flex-col items-center ${showDiscover ? "font-bold text-red-400" : ""}`}>
                         <BsSearchHeart size={26} /> Discover
                     </button>
                     {showDiscover && (
@@ -69,11 +73,11 @@ export default function Footer() {
                                 <li><Link href="/new-releases">New Releases</Link></li>
                             </ul>
                         </>
-                    )}
+                    )} */}
                 </li>
                 <li className="content-center">
-                    <Link href="/profile" className={`flex flex-col items-center ${isActive("/profile", pathname)}`}>
-                        <RiUserSettingsLine size={26} /> Profile
+                    <Link href="/" className={`flex flex-col items-center ${isActive("/", pathname)}`}>
+                        <RiHomeSmile2Line size={26} /> Home
                     </Link>
                 </li>
             </ul>

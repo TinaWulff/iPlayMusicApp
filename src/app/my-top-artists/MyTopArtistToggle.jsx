@@ -5,9 +5,12 @@ import Image from "next/image";
 export default function MyTopArtistToggle({ artists }) {
   const [openArtistId, setOpenArtistId] = useState(null);
   const [artistTracks, setArtistTracks] = useState({}); // { [artistId]: [tracks] }
-  const [loadingId, setLoadingId] = useState(null); // For at vise loading pr. artist
+  const [loadingId, setLoadingId] = useState(null);
+  const [error, setError] = useState(null); // Tilføjet error state
 
 const toggleArtist = async (id) => {
+  console.log("Klikket på artist:", id);
+  setError(null); // Nulstil fejl
   if (openArtistId === id) {
     setOpenArtistId(null);
   } else {
@@ -15,10 +18,22 @@ const toggleArtist = async (id) => {
     if (!artistTracks[id]) {
       setLoadingId(id);
       try {
+        console.log("Henter tracks for artist:", id);
         const res = await fetch('/my-top-artists/artist-top-tracks?id=' + id);
+        console.log("Response status:", res.status);
         const data = await res.json();
-        setArtistTracks((prev) => ({ ...prev, [id]: data.tracks || [] }));
+        console.log("Data:", data);
+        
+        if (data.error) {
+          // Vis fejlbeskeden direkte (inkl. ventetid hvis rate limited)
+          setError(data.error);
+          setArtistTracks((prev) => ({ ...prev, [id]: [] }));
+        } else {
+          setArtistTracks((prev) => ({ ...prev, [id]: data.tracks || [] }));
+        }
       } catch (err) {
+        console.error("Fejl ved hentning:", err);
+        setError("Kunne ikke hente tracks");
         setArtistTracks((prev) => ({ ...prev, [id]: [] }));
       } finally {
         setLoadingId(null);
@@ -28,7 +43,7 @@ const toggleArtist = async (id) => {
 };
 
   return (
-    <section className="">
+    <section className="pb-10">
       <ul className="flex gap-4 w-full max-w-full overflow-x-auto flex-nowrap">
         {artists.map(({ id, name, images }) => (
           <li key={id} className="flex-row">
@@ -52,14 +67,18 @@ const toggleArtist = async (id) => {
       </ul>
 
       {openArtistId && (
-        <article className="w-full mt-4">
+        <article className="w-full mt-4 pb-10">
             <h2 className="text-xl mb-4 font-bold">
                 {artists.find(artist => artist.id === openArtistId)?.name} - Top Tracks</h2>
+
+          {error && (
+            <div className="text-red-500 mb-4">{error}</div>
+          )}
 
           {loadingId === openArtistId ? (
             <div>Henter top tracks...</div>
           ) : (
-            <ul className="font-normal w-full overflow-y-auto max-h-96">
+            <ul className="font-normal w-full overflow-y-auto max-h-96 pb-15">
               {(artistTracks[openArtistId] || []).map((track) => (
                 <li className=" gap-4 mb-2"
                 key={track.id}>

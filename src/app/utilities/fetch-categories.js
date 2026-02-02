@@ -19,7 +19,7 @@ export default async function FetchCategories() {
  // console.log("Spotify featured playlists data:", data);
 console.log("Spotify categories data:", data);
 data.categories.items.forEach(cat => {
-  console.log("Category:", cat.id, cat.name);
+  console.log("Category:", cat.id, cat.name, "Image:", cat.icons?.[0]?.url);
 });
 
   if (!data.categories || !Array.isArray(data.categories.items)) {

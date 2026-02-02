@@ -28,7 +28,7 @@ export async function GET(request) {
   }
 
   const data = await response.json();
-  return new Response(JSON.stringify({ playlists: data.items || [] }), {
+  return new Response(JSON.stringify({ tracks: data.items || [] }), {
     status: 200,
     headers: { "Content-Type": "application/json" }
   });

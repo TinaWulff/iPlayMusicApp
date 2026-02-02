@@ -54,7 +54,7 @@ const toggleArtist = async (id) => {
       {openArtistId && (
         <article className="w-full mt-4">
             <h2 className="text-xl mb-4 font-bold">
-                {artists.find(artist => artist.id === openArtistId)?.name}</h2>
+                {artists.find(artist => artist.id === openArtistId)?.name} - Top Tracks</h2>
 
           {loadingId === openArtistId ? (
             <div>Henter top tracks...</div>

@@ -91,25 +91,22 @@ export default function CCPlayListTracksToggle({ playlists } ) {
         ))}
       </ul>
     </section>
-    
     <section className="w-full">
     {activePlaylistId && (
     <ul className="overflow-y-auto h-[500px] mb-10">
-        {playlistTracks[activePlaylistId]
-          ?.filter(track => track.track)
-          .map((track, idx) => (
+        {playlistTracks[activePlaylistId]?.map(track => (
 
-      <li key={track.track?.id ?? idx} className="flex gap-4 align-items-center mb-4"
+      <li key={track.track.id} className="flex gap-4 align-items-center mb-4"
       >
-        <Link href={`/tracks/${track.track?.id ?? '#'}`}>
+        <Link href={`/tracks/${track.track.id}`}>
             <IoPlayCircleSharp
               size={50}
               className="text-rose-500 "
               style={{ left: 0, right: 0, top: 0, bottom: 0 }}
             />
           </Link>
-           <p className="text-md font-bold col-2 self-center row-span-2 group-hover:text-white">{track.track?.name ?? 'Ukendt track'}
-            <br /><span className="col-start-2 font-light text-xs">{track.track?.artists?.[0]?.name ?? ''}</span>
+           <p className="text-md font-bold col-2 self-center row-span-2 group-hover:text-white">{track.track.name}
+            <br /><span className="col-start-2 font-light text-xs">{track.track.artists[0].name}</span>
             </p>               
       </li>
       ))}

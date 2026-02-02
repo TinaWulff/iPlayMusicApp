@@ -57,7 +57,7 @@ export default async function Home() {
           <br /><span className="col-start-2 font-light text-xs">{item.track.artists[0].name}</span></p>
           <p className="flex col-3 row-2 text-xs justify-self-end self-center mr-4 group-hover:text-white mb-2" >
           <IoPlayCircleSharp size={12} className="inline self-center mr-2"/>
-          {item.played_at.slice(0, 10) + " " + item.played_at.slice(12, 16)}
+          {item.played_at.slice(0, 10) + " " + item.played_at.slice(11, 16)}
         </p>
 
       </li>

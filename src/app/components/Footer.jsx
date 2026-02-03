@@ -10,23 +10,21 @@ import { RiStarSmileLine } from "react-icons/ri";
 //import { RiUserSettingsLine } from "react-icons/ri";
 import { RiHomeSmile2Line } from "react-icons/ri";
 
-
+import Player from "./Player";
+import Link from "next/link";
 
 // Funktion til at tjekke om path matcher og returnere active-klassse
 function isActive(path, currentPath) {
     return path === currentPath ? "font-bold text-rose-600" : "";
 }
 
-
-import Link from "next/link";
-
 export default function Footer() {
     const pathname = usePathname();
-    const [showDiscover, setShowDiscover] = useState(false);
 
-    // // Overlay klik
-    // const handleDiscoverClick = () => setShowDiscover((v) => !v);
-    // const handleOverlayClick = () => setShowDiscover(false);
+    const [showPlayer, setShowPlayer] = useState(false);
+    //Overlay klik
+    const handleDiscoverClick = () => setShowPlayer((v) => !v);
+    const handleOverlayClick = () => setShowPlayer(false);
 
     return (
         <footer className="w-full max-w-full px-4 fixed bottom-0 h-[66px] bg-white shadow-2xl flex items-center justify-center z-50"
@@ -43,14 +41,23 @@ export default function Footer() {
                     </Link>
                 </li>
                 <li className="content-center">
-                    <Link href="/player" className="flex flex-col items-center">
-                        <Image className="rounded-full p-2 w-[55] h-[55] bg-gradient-to-br from-[#EE0979] to-[#FF6A00]"
+
+                         <button type="button" onClick={handleDiscoverClick} className={`flex flex-col items-center ${showPlayer ? "font-bold text-red-400" : ""}`}>
+                         <Image className="rounded-full p-2 w-[55] h-[55] bg-gradient-to-br from-[#EE0979] to-[#FF6A00]"
                             src="/assets/_ionicons_svg_md-wifi.svg"
-                            alt="Wifi"
+                            alt="Player"
                             width={33}
                             height={33}
-                        />
-                    </Link>
+                            />
+                    </button>
+                    {showPlayer && (
+                        <>
+                            <div onClick={handleOverlayClick} className="fixed inset-0 z-40 bg-black/50" />
+                            <div className="fixed bottom-[66px] left-0 right-0 z-50">
+                                <Player showFull={true} />
+                            </div>
+                        </>
+                    )}
                 </li>
 
 

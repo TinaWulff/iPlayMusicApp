@@ -4,6 +4,19 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import Image from "next/image";
+import PlayButton from "@/app/components/PlayButton";
+
+// til afspilningsfunktionalitet - ved vores PlayButton komponent
+// Mapper track til format som player forstår
+function trackToPlayerTrack(item, idx) {
+    return {
+        id: item.track?.id ?? idx,
+        title: item.track?.name ?? 'Ukendt track',
+        artist: item.track?.artists?.[0]?.name ?? 'Unknown',
+        // Bruger lokale sange da Spotify ikke kan streames uden premium
+        src: `/assets/music/${['Milky_Wayvers_Love-in-Japan.mp3', 'Another Kid & Pratzapp - Kyoto (freetouse.com).mp3', 'Hazelwood - Coming Of Age (freetouse.com).mp3', 'massobeats - honey jam (freetouse.com).mp3'][idx % 4]}`
+    };
+}
 
 export default async function Home() {
   const cookieStore = await cookies();
@@ -25,19 +38,19 @@ export default async function Home() {
 
   return (
     <>
-    <section className="w-full">
+    <section className="w-full mx-4">
 
     <h2 className="flex justify-center items-center mb-4">
       Welcome to <span className="text-rose-400 text-xl font-bold mx-2"> I Play Music </span> {data.display_name}
     </h2>
-    <h1 className="bg-gradient-to-br from-[#EE0979] to-[#FF6A00] bg-clip-text text-transparent text-3xl mb-4 font-bold mx-2"> Last Played Tracks </h1>
+    <h1 className="bg-gradient-to-br from-[#EE0979] to-[#FF6A00] bg-clip-text text-transparent text-4xl mb-4 font-bold mx-2"> Last Played Tracks </h1>
     
     <ul className="flex flex-col overflow-y-auto ] h-[800px] pb-15 flex-1 w-full max-w-full">
-    {latestPlayedTracks.map((item) => (
+    {latestPlayedTracks.map((item, idx) => (
 
       <li key={item.track.id}     className="w-full grid gap-x-4 [grid-template-columns:auto_3fr_3fr] group hover:bg-gradient-to-br from-[#EE0979] to-[#FF6A00] hover:shadow-lg rounded-lg mb-4">
      
-         <div className="relative w-full min-w-[70px] min-h-[70px] flex-shrink-0 col-1 row-span-2 group">
+         <div className="relative w-full min-w-[70px] min-h-[70px] flex-shrink-0 col-1 row-span-2 group flex justify-center items-center">
           <Image
               src={item.track.album.images[0].url}
               alt={item.track.name}
@@ -45,13 +58,10 @@ export default async function Home() {
               height={80}
               className="hidden group-hover:block rounded"
             />
-          <Link href={`/tracks/${item.track.id}`}>
-            <IoPlayCircleSharp
-              size={50}
-              className="col-start-1 absolute inset-0 m-auto text-rose-500 group-hover:w-[35px]"
-              style={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            />
-          </Link>
+          <PlayButton 
+              track={trackToPlayerTrack(item, idx)} 
+              className="text-rose-500 hover:cursor-pointer drop-shadow-lg items-center z-50 absolute self-center group-hover:scale-75" 
+          />     
        </div>
           <p className="text-md font-bold col-2 self-center row-span-2 group-hover:text-white">{item.track.name}
           <br /><span className="col-start-2 font-light text-xs">{item.track.artists[0].name}</span></p>
@@ -68,6 +78,9 @@ export default async function Home() {
     </>
   );
 }
+
+
+// group-hover:w-[20px] group-hover:h-[20px] 
 
 // Text-gradient Tailwind:
 // bg-gradient-to-br fra og til farver

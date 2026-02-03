@@ -2,7 +2,19 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IoPlayCircleSharp } from "react-icons/io5";
+import PlayButton from "@/app/components/PlayButton";
+
+// til afspilningsfunktionalitet - ved vores PlayButton komponent
+// Mapper track til format som vores player forstår
+function trackToPlayerTrack(track, idx) {
+    return {
+        id: track.track?.id ?? idx,
+        title: track.track?.name ?? 'Ukendt track',
+        artist: track.track?.artists?.[0]?.name ?? 'Unknown',
+        // Bruger lokale sange da Spotify ikke kan streames uden premium
+        src: `/assets/music/${['Milky_Wayvers_Love-in-Japan.mp3', 'Another Kid & Pratzapp - Kyoto (freetouse.com).mp3', 'Hazelwood - Coming Of Age (freetouse.com).mp3', 'massobeats - honey jam (freetouse.com).mp3'][idx % 4]}`
+    };
+}
 
 export default function CCPlayListTracksToggle({ playlists } ) {
   const [activePlaylistId, setActivePlaylistId] = useState(playlists[0]?.id);
@@ -102,16 +114,18 @@ export default function CCPlayListTracksToggle({ playlists } ) {
 
       <li key={track.track?.id ?? idx} className="flex gap-4 align-items-center mb-4"
       >
-        <Link href={`/tracks/${track.track?.id ?? '#'}`}>
-            <IoPlayCircleSharp
+         <PlayButton 
+            track={trackToPlayerTrack(track, idx)} 
+            className="text-rose-500 hover:cursor-pointer drop-shadow-lg" 
+         />  
+        <Link href={`/tracks/${track.track?.id ?? '#'}`}><p className="text-md font-bold col-2 self-center row-span-2 group-hover:text-white">{track.track?.name ?? 'Ukendt track'}
+            <br /><span className="col-start-2 font-light text-xs">{track.track?.artists?.[0]?.name ?? ''}</span>
+            </p> </Link>
+            {/* <IoPlayCircleSharp
               size={50}
               className="text-rose-500 "
               style={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            />
-          </Link>
-           <p className="text-md font-bold col-2 self-center row-span-2 group-hover:text-white">{track.track?.name ?? 'Ukendt track'}
-            <br /><span className="col-start-2 font-light text-xs">{track.track?.artists?.[0]?.name ?? ''}</span>
-            </p>               
+            /> */}               
       </li>
       ))}
     </ul>

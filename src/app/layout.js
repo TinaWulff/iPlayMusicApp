@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import { PlayerProvider } from "@/app/context/PlayerContext";
 
 export const metadata = {
   title: { 
@@ -16,11 +17,13 @@ export default function RootLayout({ children }) {
       <body
         className="box-border"
       >
-        <Header />
-        <main className="flex">
-        {children}
-        </main>
-        <Footer />
+        <PlayerProvider>
+          <Header />
+          <main className="flex">
+          {children}
+          </main>
+          <Footer />
+        </PlayerProvider>
       </body>
     </html>
   );

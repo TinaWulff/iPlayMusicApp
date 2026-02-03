@@ -30,14 +30,14 @@ export default async function NewReleasesPage() {
         <ul>
           {newReleasesWithTracks.map((album) => (
             <li key={album.id} className="font-bold mb-10">
-              <article className="rounded-lg w-full h-[350px] shadow-xl hover:cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out ">
+              <article className="rounded-lg w-full h-[auto] ratio-[2/3] shadow-xl hover:cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out ">
               <Link href={album.external_urls?.spotify ?? '#'} target="_blank" rel="noopener noreferrer" className="relative block">
               {album.images?.[0]?.url && (
-                <Image className="rounded-lg w-full h-[350px] object-cover"
-                src={album.images[0].url} alt={album.name} width={300} height={350} />
+                <Image className="rounded-lg w-full h-[auto] object-cover"
+                src={album.images[0].url} alt={album.name} width={450} height={400} />
               )}
               
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center">                  
+              <div className="absolute bottom-[30px] left-[15px] flex flex-col items-start">                  
                 <p className="text-white text-2xl font-bold">{album.name}</p>
                 <p className="text-white text-md font-light hover:underline">
                   By {album.artists?.[0]?.name ?? ''}

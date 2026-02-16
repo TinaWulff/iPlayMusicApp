@@ -27,5 +27,6 @@ export async function GET(request) {
     cookieStore.set("IPM_AT", data.access_token, { maxAge: data.expires_in });
     cookieStore.set("IPM_RT", data.refresh_token, { maxAge: data.expires_in * 5 });
 
-		return NextResponse.redirect(new URL("http://127.0.0.1:3000/"));
+		// Til deploy: return NextResponse.redirect(new URL("/", request.url));
+		return NextResponse.redirect(new URL("/", request.url));
 }
